@@ -1,5 +1,5 @@
 PKG_NAME := libpeas
-URL := https://download.gnome.org/core/3.20/3.20.2/sources/libpeas-1.18.0.tar.xz
-ARCHIVES :=
+URL := https://download.gnome.org/sources/libpeas/1.20/libpeas-1.20.0.tar.xz
+
 
 include ../common/Makefile.common
