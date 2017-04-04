@@ -4,16 +4,16 @@
 #
 Name     : libpeas
 Version  : 1.20.0
-Release  : 2
+Release  : 3
 URL      : https://download.gnome.org/sources/libpeas/1.20/libpeas-1.20.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.20/libpeas-1.20.0.tar.xz
 Summary  : libpeas-gtk, a GObject plugins library (Gtk widgets)
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: libpeas-bin
+Requires: libpeas-data
 Requires: libpeas-lib
 Requires: libpeas-doc
-Requires: libpeas-data
 Requires: libpeas-locales
 BuildRequires : docbook-xml
 BuildRequires : gettext
@@ -94,7 +94,7 @@ locales components for the libpeas package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1489096046
+export SOURCE_DATE_EPOCH=1491323698
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -106,7 +106,7 @@ export no_proxy=localhost
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1489096046
+export SOURCE_DATE_EPOCH=1491323698
 rm -rf %{buildroot}
 %make_install
 %find_lang libpeas
@@ -122,6 +122,9 @@ rm -rf %{buildroot}
 
 %files data
 %defattr(-,root,root,-)
+/usr/lib64/girepository-1.0/Peas-1.0.typelib
+/usr/lib64/girepository-1.0/PeasGtk-1.0.typelib
+/usr/share/gir-1.0/*.gir
 /usr/share/icons/hicolor/16x16/actions/libpeas-plugin.png
 /usr/share/icons/hicolor/22x22/actions/libpeas-plugin.png
 /usr/share/icons/hicolor/32x32/actions/libpeas-plugin.png
@@ -143,13 +146,10 @@ rm -rf %{buildroot}
 /usr/include/libpeas-1.0/libpeas/peas-object-module.h
 /usr/include/libpeas-1.0/libpeas/peas-plugin-info.h
 /usr/include/libpeas-1.0/libpeas/peas.h
-/usr/lib64/girepository-1.0/Peas-1.0.typelib
-/usr/lib64/girepository-1.0/PeasGtk-1.0.typelib
 /usr/lib64/libpeas-1.0.so
 /usr/lib64/libpeas-gtk-1.0.so
 /usr/lib64/pkgconfig/libpeas-1.0.pc
 /usr/lib64/pkgconfig/libpeas-gtk-1.0.pc
-/usr/share/gir-1.0/*.gir
 
 %files doc
 %defattr(-,root,root,-)
