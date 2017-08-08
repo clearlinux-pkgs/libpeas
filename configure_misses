@@ -1,0 +1,6 @@
+Configure miss: gdb
+Configure miss: whether to build with coverage testing
+Configure miss: Glade.
+Configure miss: Lua 5.1 availability.
+Configure miss: PYGOBJECT
+Configure miss: Python 3 availability.... checking for a Python interpreter with version >= 3.2.0
