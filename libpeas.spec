@@ -4,7 +4,7 @@
 #
 Name     : libpeas
 Version  : 1.22.0
-Release  : 6
+Release  : 7
 URL      : https://download.gnome.org/sources/libpeas/1.22/libpeas-1.22.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.22/libpeas-1.22.0.tar.xz
 Summary  : libpeas-gtk, a GObject plugins library (Gtk widgets)
