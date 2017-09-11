@@ -3,4 +3,5 @@ Configure miss: whether to build with coverage testing
 Configure miss: Glade.
 Configure miss: Lua 5.1 availability.
 Configure miss: PYGOBJECT
-Configure miss: Python 3 availability.... checking for a Python interpreter with version >= 3.2.0
+Configure miss: x86_64-generic-linux-gnu-python3-config
+Configure miss: PYGOBJECT
