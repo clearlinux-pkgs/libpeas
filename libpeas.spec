@@ -4,17 +4,18 @@
 #
 Name     : libpeas
 Version  : 1.22.0
-Release  : 9
+Release  : 10
 URL      : https://download.gnome.org/sources/libpeas/1.22/libpeas-1.22.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.22/libpeas-1.22.0.tar.xz
 Summary  : libpeas-gtk, a GObject plugins library (Gtk widgets)
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: libpeas-bin
-Requires: libpeas-data
-Requires: libpeas-lib
-Requires: libpeas-doc
-Requires: libpeas-locales
+Requires: libpeas-bin = %{version}-%{release}
+Requires: libpeas-data = %{version}-%{release}
+Requires: libpeas-lib = %{version}-%{release}
+Requires: libpeas-license = %{version}-%{release}
+Requires: libpeas-locales = %{version}-%{release}
+BuildRequires : buildreq-gnome
 BuildRequires : docbook-xml
 BuildRequires : gettext
 BuildRequires : gtk-doc
@@ -28,7 +29,8 @@ BuildRequires : pkgconfig(gmodule-2.0)
 BuildRequires : pkgconfig(gobject-2.0)
 BuildRequires : pkgconfig(gobject-introspection-1.0)
 BuildRequires : pkgconfig(gtk+-3.0)
-BuildRequires : pkgconfig(libxml-2.0)
+BuildRequires : pkgconfig(pygobject-3.0)
+BuildRequires : python3-dev
 BuildRequires : valgrind
 
 %description
@@ -41,7 +43,8 @@ several Gnome applications like gedit and Totem.
 %package bin
 Summary: bin components for the libpeas package.
 Group: Binaries
-Requires: libpeas-data
+Requires: libpeas-data = %{version}-%{release}
+Requires: libpeas-license = %{version}-%{release}
 
 %description bin
 bin components for the libpeas package.
@@ -58,10 +61,10 @@ data components for the libpeas package.
 %package dev
 Summary: dev components for the libpeas package.
 Group: Development
-Requires: libpeas-lib
-Requires: libpeas-bin
-Requires: libpeas-data
-Provides: libpeas-devel
+Requires: libpeas-lib = %{version}-%{release}
+Requires: libpeas-bin = %{version}-%{release}
+Requires: libpeas-data = %{version}-%{release}
+Provides: libpeas-devel = %{version}-%{release}
 
 %description dev
 dev components for the libpeas package.
@@ -78,10 +81,19 @@ doc components for the libpeas package.
 %package lib
 Summary: lib components for the libpeas package.
 Group: Libraries
-Requires: libpeas-data
+Requires: libpeas-data = %{version}-%{release}
+Requires: libpeas-license = %{version}-%{release}
 
 %description lib
 lib components for the libpeas package.
+
+
+%package license
+Summary: license components for the libpeas package.
+Group: Default
+
+%description license
+license components for the libpeas package.
 
 
 %package locales
@@ -100,9 +112,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1505140694
-%configure --disable-static
-make V=1  %{?_smp_mflags}
+export SOURCE_DATE_EPOCH=1554223312
+export LDFLAGS="${LDFLAGS} -fno-lto"
+%configure --disable-static --disable-python2
+make  %{?_smp_mflags}
 
 %check
 export LANG=C
@@ -112,14 +125,18 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1505140694
+export SOURCE_DATE_EPOCH=1554223312
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/libpeas
+cp COPYING %{buildroot}/usr/share/package-licenses/libpeas/COPYING
 %make_install
 %find_lang libpeas
 
 %files
 %defattr(-,root,root,-)
 /usr/lib64/peas-demo/plugins/helloworld/helloworld.plugin
+/usr/lib64/peas-demo/plugins/pythonhello/pythonhello.plugin
+/usr/lib64/peas-demo/plugins/pythonhello/pythonhello.py
 /usr/lib64/peas-demo/plugins/secondtime/secondtime.plugin
 
 %files bin
@@ -158,7 +175,7 @@ rm -rf %{buildroot}
 /usr/lib64/pkgconfig/libpeas-gtk-1.0.pc
 
 %files doc
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/gtk-doc/html/libpeas/PeasActivatable.html
 /usr/share/gtk-doc/html/libpeas/PeasEngine.html
 /usr/share/gtk-doc/html/libpeas/PeasExtensionBase.html
@@ -197,10 +214,15 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/lib64/libpeas-1.0.so.0
 /usr/lib64/libpeas-1.0.so.0.2200.0
+/usr/lib64/libpeas-1.0/loaders/libpython3loader.so
 /usr/lib64/libpeas-gtk-1.0.so.0
 /usr/lib64/libpeas-gtk-1.0.so.0.2200.0
 /usr/lib64/peas-demo/plugins/helloworld/libhelloworld.so
 /usr/lib64/peas-demo/plugins/secondtime/libsecondtime.so
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/libpeas/COPYING
 
 %files locales -f libpeas.lang
 %defattr(-,root,root,-)

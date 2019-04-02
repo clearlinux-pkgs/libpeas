@@ -1,6 +1,5 @@
 # This file contains pkgconfig build requirements that get picked up
 # but are undesirable. One entry per line, no whitespace.
-pygobject-3.0
 gladeui-2.0
 luajit
 lua5.1
