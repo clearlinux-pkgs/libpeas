@@ -4,10 +4,10 @@
 #
 Name     : libpeas
 Version  : 1.22.0
-Release  : 11
+Release  : 12
 URL      : https://download.gnome.org/sources/libpeas/1.22/libpeas-1.22.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.22/libpeas-1.22.0.tar.xz
-Summary  : libpeas-gtk, a GObject plugins library (Gtk widgets)
+Summary  : A GObject plugins library
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: libpeas-bin = %{version}-%{release}
@@ -65,6 +65,7 @@ Requires: libpeas-lib = %{version}-%{release}
 Requires: libpeas-bin = %{version}-%{release}
 Requires: libpeas-data = %{version}-%{release}
 Provides: libpeas-devel = %{version}-%{release}
+Requires: libpeas = %{version}-%{release}
 
 %description dev
 dev components for the libpeas package.
@@ -112,8 +113,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554223312
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export SOURCE_DATE_EPOCH=1557016945
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static --disable-python2
 make  %{?_smp_mflags}
 
@@ -125,7 +132,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1554223312
+export SOURCE_DATE_EPOCH=1557016945
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libpeas
 cp COPYING %{buildroot}/usr/share/package-licenses/libpeas/COPYING
