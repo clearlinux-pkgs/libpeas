@@ -1,3 +1,79 @@
+Overview of Changes in libpeas 1.24.0
+=====================================
+
+* Setup troubleshooting environment when running automated tests
+* Translation updates:
+  - Brazilian Portuguese
+  - German
+  - Italian
+  - Turkish
+
+Overview of Changes in libpeas 1.23.92
+======================================
+
+This is a RC release for the upcoming GNOME 3.34 release.
+
+* Fix soname usage to match 1.22.x
+* Fix typo in deprecation ignores
+* Fix gtk_menu_popup() deprecations
+* Fix meson build warning
+* Translation updates:
+  - Basque
+  - Catalan
+  - Croatian
+  - Czech
+  - Finnish
+  - French
+  - Friulan
+  - Galician
+  - Hungarian
+  - Japanese
+  - Korean
+  - Lithuanian
+  - Polish
+  - Romanian
+  - Serbian
+  - Spanish
+  - Swedish
+
+Overview of Changes in libpeas 1.23.90.1
+========================================
+
+This is a followup release to yesterdays 1.23.90 which includes a
+fix to ensure that programs linking against libpeas-1.0 also link
+against gobject-introspection-1.0.
+
+Overview of Changes in libpeas 1.23.90
+======================================
+
+This release is the first to use the meson build system. Autotools
+has been removed. In most cases, the transition to meson should be
+relatively painless, and has many examples from other projects in
+the GNOME ecosystem to serve as examples.
+
+See meson_options.txt for the updated parameters.
+
+We'll have a series of .90, .91, .92 releases up to 1.24 if they
+are necessary following the GNOME release schedule for 3.34 in
+September.
+
+* Port to meson build system, autotools has been removed
+* Support for python3.8 in the python3 loader
+* Reduce warning impact of GParameter deprecations on API consumers
+* Fix a number of deprecations in internal API
+* Remove use of intltool in favor of gettext
+* Add versioning macros and hide non-public symbols
+* Translation updates:
+  - Catalan
+  - Dutch
+  - Esperanto
+  - French
+  - Icelandic
+  - Malayalam
+  - Polish
+
+Thanks to everyone who provided patches along the way.
+
 Overview of Changes in libpeas 1.22.0
 ====================================
 
