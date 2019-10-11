@@ -4,10 +4,10 @@
 #
 Name     : libpeas
 Version  : 1.24.0
-Release  : 13
+Release  : 14
 URL      : https://download.gnome.org/sources/libpeas/1.24/libpeas-1.24.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.24/libpeas-1.24.0.tar.xz
-Summary  : A GObject plugins library
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
 Requires: libpeas-bin = %{version}-%{release}
@@ -21,9 +21,7 @@ BuildRequires : gtk-doc-dev
 BuildRequires : pkgconfig(gobject-introspection-1.0)
 BuildRequires : pkgconfig(gtk-doc)
 BuildRequires : pkgconfig(pygobject-3.0)
-BuildRequires : pkgconfig(python2)
 BuildRequires : pkgconfig(python3)
-BuildRequires : python-core
 BuildRequires : python3-dev
 BuildRequires : valgrind
 
@@ -59,7 +57,6 @@ Requires: libpeas-lib = %{version}-%{release}
 Requires: libpeas-bin = %{version}-%{release}
 Requires: libpeas-data = %{version}-%{release}
 Provides: libpeas-devel = %{version}-%{release}
-Requires: libpeas = %{version}-%{release}
 Requires: libpeas = %{version}-%{release}
 
 %description dev
@@ -100,8 +97,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568123230
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1570820385
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -115,7 +111,7 @@ ninja -v -C builddir
 
 %install
 mkdir -p %{buildroot}/usr/share/package-licenses/libpeas
-cp COPYING %{buildroot}/usr/share/package-licenses/libpeas/COPYING
+cp %{_builddir}/libpeas-1.24.0/COPYING %{buildroot}/usr/share/package-licenses/libpeas/3704f4680301a60004b20f94e0b5b8c7ff1484a9
 DESTDIR=%{buildroot} ninja -C builddir install
 %find_lang libpeas-1.0
 
@@ -175,7 +171,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libpeas/COPYING
+/usr/share/package-licenses/libpeas/3704f4680301a60004b20f94e0b5b8c7ff1484a9
 
 %files locales -f libpeas-1.0.lang
 %defattr(-,root,root,-)

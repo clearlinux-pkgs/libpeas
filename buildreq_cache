@@ -6,6 +6,5 @@ pkgconfig(pygobject-3.0)
 pkgconfig(python2)
 pkgconfig(python3)
 pkgconfig(python3-embed)
-python-core
 python3-dev
 valgrind

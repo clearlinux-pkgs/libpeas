@@ -4,4 +4,5 @@ gladeui-2.0
 luajit
 lua5.1
 lua5.1-lgi
+python2
 python3-embed
