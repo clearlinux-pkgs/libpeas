@@ -39,6 +39,7 @@ libpeas-1.0.so.0:peas_extension_set_get_type
 libpeas-1.0.so.0:peas_extension_set_new
 libpeas-1.0.so.0:peas_extension_set_new_valist
 libpeas-1.0.so.0:peas_extension_set_newv
+libpeas-1.0.so.0:peas_gettext
 libpeas-1.0.so.0:peas_object_module_create_object
 libpeas-1.0.so.0:peas_object_module_get_library
 libpeas-1.0.so.0:peas_object_module_get_module_name
