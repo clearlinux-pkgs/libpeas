@@ -4,7 +4,7 @@
 #
 Name     : libpeas
 Version  : 1.24.1
-Release  : 15
+Release  : 16
 URL      : https://download.gnome.org/sources/libpeas/1.24/libpeas-1.24.1.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.24/libpeas-1.24.1.tar.xz
 Summary  : No detailed summary available
