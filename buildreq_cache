@@ -1,10 +1,5 @@
-1.24.1
+1.26.0
 gtk-doc-dev
 pkgconfig(gtk-doc)
-pkgconfig(lua5.1-lgi)
 pkgconfig(pygobject-3.0)
-pkgconfig(python2)
 pkgconfig(python3)
-pkgconfig(python3-embed)
-python3-dev
-valgrind
