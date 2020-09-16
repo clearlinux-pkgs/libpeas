@@ -1,5 +1,4 @@
-1.26.0
+1.28.0
 gtk-doc-dev
 pkgconfig(gtk-doc)
 pkgconfig(pygobject-3.0)
-pkgconfig(python3)
