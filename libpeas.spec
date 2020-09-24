@@ -4,7 +4,7 @@
 #
 Name     : libpeas
 Version  : 1.28.0
-Release  : 18
+Release  : 19
 URL      : https://download.gnome.org/sources/libpeas/1.28/libpeas-1.28.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.28/libpeas-1.28.0.tar.xz
 Summary  : No detailed summary available
