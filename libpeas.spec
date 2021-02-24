@@ -4,7 +4,7 @@
 #
 Name     : libpeas
 Version  : 1.28.0
-Release  : 20
+Release  : 21
 URL      : https://download.gnome.org/sources/libpeas/1.28/libpeas-1.28.0.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/1.28/libpeas-1.28.0.tar.xz
 Summary  : No detailed summary available
@@ -21,6 +21,7 @@ BuildRequires : gtk-doc-dev
 BuildRequires : pkgconfig(gobject-introspection-1.0)
 BuildRequires : pkgconfig(gtk-doc)
 BuildRequires : pkgconfig(pygobject-3.0)
+BuildRequires : python3-dev
 
 %description
 Introducing libpeas
@@ -95,7 +96,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1614193360
+export SOURCE_DATE_EPOCH=1614193479
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -123,6 +124,8 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %files
 %defattr(-,root,root,-)
 /usr/lib64/peas-demo/plugins/helloworld/helloworld.plugin
+/usr/lib64/peas-demo/plugins/pythonhello/pythonhello.plugin
+/usr/lib64/peas-demo/plugins/pythonhello/pythonhello.py
 /usr/lib64/peas-demo/plugins/secondtime/secondtime.plugin
 
 %files bin
@@ -166,6 +169,7 @@ DESTDIR=%{buildroot} ninja -C builddir install
 %defattr(-,root,root,-)
 /usr/lib64/libpeas-1.0.so.0
 /usr/lib64/libpeas-1.0.so.0.2800.0
+/usr/lib64/libpeas-1.0/loaders/libpython3loader.so
 /usr/lib64/libpeas-gtk-1.0.so.0
 /usr/lib64/libpeas-gtk-1.0.so.0.2800.0
 /usr/lib64/peas-demo/plugins/helloworld/libhelloworld.so
