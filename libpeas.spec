@@ -4,21 +4,18 @@
 # Using build pattern: meson
 #
 Name     : libpeas
-Version  : 1.36.0
-Release  : 31
-URL      : https://download.gnome.org/sources/libpeas/1.36/libpeas-1.36.0.tar.xz
-Source0  : https://download.gnome.org/sources/libpeas/1.36/libpeas-1.36.0.tar.xz
+Version  : 2.0.0
+Release  : 33
+URL      : https://download.gnome.org/sources/libpeas/2.0/libpeas-2.0.0.tar.xz
+Source0  : https://download.gnome.org/sources/libpeas/2.0/libpeas-2.0.0.tar.xz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : LGPL-2.1
-Requires: libpeas-bin = %{version}-%{release}
-Requires: libpeas-data = %{version}-%{release}
-Requires: libpeas-lib = %{version}-%{release}
-Requires: libpeas-license = %{version}-%{release}
-Requires: libpeas-locales = %{version}-%{release}
 BuildRequires : buildreq-gnome
 BuildRequires : buildreq-meson
+BuildRequires : gjs-dev
 BuildRequires : pkgconfig(gi-docgen)
+BuildRequires : pkgconfig(gjs-1.0)
 BuildRequires : pkgconfig(gobject-introspection-1.0)
 BuildRequires : pkgconfig(pygobject-3.0)
 BuildRequires : python3-dev
@@ -27,161 +24,63 @@ BuildRequires : python3-dev
 %define debug_package %{nil}
 
 %description
-Introducing libpeas
-===================
+# Introducing libpeas
 libpeas is a gobject-based plugins engine, and is targetted at giving every
 application the chance to assume its own extensibility. It is currently used by
 several Gnome applications like gedit and Totem.
 
-%package bin
-Summary: bin components for the libpeas package.
-Group: Binaries
-Requires: libpeas-data = %{version}-%{release}
-Requires: libpeas-license = %{version}-%{release}
-
-%description bin
-bin components for the libpeas package.
-
-
-%package data
-Summary: data components for the libpeas package.
-Group: Data
-
-%description data
-data components for the libpeas package.
-
-
-%package dev
-Summary: dev components for the libpeas package.
-Group: Development
-Requires: libpeas-lib = %{version}-%{release}
-Requires: libpeas-bin = %{version}-%{release}
-Requires: libpeas-data = %{version}-%{release}
-Provides: libpeas-devel = %{version}-%{release}
-Requires: libpeas = %{version}-%{release}
-
-%description dev
-dev components for the libpeas package.
-
-
-%package lib
-Summary: lib components for the libpeas package.
-Group: Libraries
-Requires: libpeas-data = %{version}-%{release}
-Requires: libpeas-license = %{version}-%{release}
-
-%description lib
-lib components for the libpeas package.
-
-
-%package license
-Summary: license components for the libpeas package.
-Group: Default
-
-%description license
-license components for the libpeas package.
-
-
-%package locales
-Summary: locales components for the libpeas package.
-Group: Default
-
-%description locales
-locales components for the libpeas package.
-
-
 %prep
-%setup -q -n libpeas-1.36.0
-cd %{_builddir}/libpeas-1.36.0
+%setup -q -n libpeas-2.0.0
+cd %{_builddir}/libpeas-2.0.0
+pushd ..
+cp -a libpeas-2.0.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1680038969
+export SOURCE_DATE_EPOCH=1696256567
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FCFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export FFLAGS="$FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-export CXXFLAGS="$CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz "
-CFLAGS="$CFLAGS" CXXFLAGS="$CXXFLAGS" LDFLAGS="$LDFLAGS" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dgtk_doc=false  builddir
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
+meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dgtk_doc=false  builddir
 ninja -v -C builddir
-
-%check
-export LANG=C.UTF-8
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-meson test -C builddir --print-errorlogs || :
+CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 -O3" CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 " LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3" meson --libdir=lib64 --prefix=/usr --buildtype=plain -Dgtk_doc=false  builddiravx2
+ninja -v -C builddiravx2
 
 %install
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CLEAR_INTERMEDIATE_CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS -O3 -fdebug-types-section -femit-struct-debug-baseonly -ffat-lto-objects -flto=auto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
+CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS"
+CXXFLAGS="$CLEAR_INTERMEDIATE_CXXFLAGS"
+FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
+FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
+ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
+LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
 mkdir -p %{buildroot}/usr/share/package-licenses/libpeas
 cp %{_builddir}/libpeas-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libpeas/3704f4680301a60004b20f94e0b5b8c7ff1484a9 || :
+DESTDIR=%{buildroot}-v3 ninja -C builddiravx2 install
 DESTDIR=%{buildroot} ninja -C builddir install
-%find_lang libpeas-1.0
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/peas-demo/plugins/helloworld/helloworld.plugin
-/usr/lib64/peas-demo/plugins/pythonhello/pythonhello.plugin
-/usr/lib64/peas-demo/plugins/pythonhello/pythonhello.py
-/usr/lib64/peas-demo/plugins/secondtime/secondtime.plugin
-
-%files bin
-%defattr(-,root,root,-)
-/usr/bin/peas-demo
-
-%files data
-%defattr(-,root,root,-)
-/usr/lib64/girepository-1.0/Peas-1.0.typelib
-/usr/lib64/girepository-1.0/PeasGtk-1.0.typelib
-/usr/share/gir-1.0/*.gir
-/usr/share/icons/hicolor/16x16/actions/libpeas-plugin.png
-/usr/share/icons/hicolor/22x22/actions/libpeas-plugin.png
-/usr/share/icons/hicolor/32x32/actions/libpeas-plugin.png
-/usr/share/icons/hicolor/scalable/actions/libpeas-plugin.svg
-
-%files dev
-%defattr(-,root,root,-)
-/usr/include/libpeas-1.0/libpeas-gtk/peas-gtk-autocleanups.h
-/usr/include/libpeas-1.0/libpeas-gtk/peas-gtk-configurable.h
-/usr/include/libpeas-1.0/libpeas-gtk/peas-gtk-plugin-manager-view.h
-/usr/include/libpeas-1.0/libpeas-gtk/peas-gtk-plugin-manager.h
-/usr/include/libpeas-1.0/libpeas-gtk/peas-gtk.h
-/usr/include/libpeas-1.0/libpeas/peas-activatable.h
-/usr/include/libpeas-1.0/libpeas/peas-autocleanups.h
-/usr/include/libpeas-1.0/libpeas/peas-engine.h
-/usr/include/libpeas-1.0/libpeas/peas-extension-base.h
-/usr/include/libpeas-1.0/libpeas/peas-extension-set.h
-/usr/include/libpeas-1.0/libpeas/peas-extension.h
-/usr/include/libpeas-1.0/libpeas/peas-object-module.h
-/usr/include/libpeas-1.0/libpeas/peas-plugin-info.h
-/usr/include/libpeas-1.0/libpeas/peas-version-macros.h
-/usr/include/libpeas-1.0/libpeas/peas-version.h
-/usr/include/libpeas-1.0/libpeas/peas.h
-/usr/lib64/libpeas-1.0.so
-/usr/lib64/libpeas-gtk-1.0.so
-/usr/lib64/pkgconfig/libpeas-1.0.pc
-/usr/lib64/pkgconfig/libpeas-gtk-1.0.pc
-
-%files lib
-%defattr(-,root,root,-)
-/usr/lib64/libpeas-1.0.so.0
-/usr/lib64/libpeas-1.0.so.0.3600.0
-/usr/lib64/libpeas-1.0/loaders/libpython3loader.so
-/usr/lib64/libpeas-gtk-1.0.so.0
-/usr/lib64/libpeas-gtk-1.0.so.0.3600.0
-/usr/lib64/peas-demo/plugins/helloworld/libhelloworld.so
-/usr/lib64/peas-demo/plugins/secondtime/libsecondtime.so
-
-%files license
-%defattr(0644,root,root,0755)
-/usr/share/package-licenses/libpeas/3704f4680301a60004b20f94e0b5b8c7ff1484a9
-
-%files locales -f libpeas-1.0.lang
-%defattr(-,root,root,-)
-
