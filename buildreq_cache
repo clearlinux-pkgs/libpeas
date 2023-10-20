@@ -1,3 +1,5 @@
-1.36.0
+2.0.0
+gjs-dev
 pkgconfig(gi-docgen)
+pkgconfig(gjs-1.0)
 pkgconfig(pygobject-3.0)
