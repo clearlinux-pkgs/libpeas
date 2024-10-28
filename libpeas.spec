@@ -7,7 +7,7 @@
 #
 Name     : libpeas
 Version  : 2.0.5
-Release  : 41
+Release  : 42
 URL      : https://download.gnome.org/sources/libpeas/2.0/libpeas-2.0.5.tar.xz
 Source0  : https://download.gnome.org/sources/libpeas/2.0/libpeas-2.0.5.tar.xz
 Summary  : No detailed summary available
